@@ -7,6 +7,56 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions></Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
 
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7*"></ColumnDefinition>
+                <ColumnDefinition ></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="Liste des tâches" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" />
+            <Button Grid.Column="1" x:Name="add" FontSize="25" ToolTip="Ajouter une tâche" Click="add_Click" Margin="10,20,10,20"  >
+                <TextBlock Text="+" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </Button>
+        </Grid>
+
+        <FlowDocumentReader Grid.Row="1" ViewingMode="Scroll">
+            <FlowDocument>
+                <Table CellSpacing="1"  x:Name="contentTable">
+                    <Table.Columns>
+                        <TableColumn Width="7*"/>
+                        <TableColumn Width="10*"/>
+                        <TableColumn Width="5*" />
+                    </Table.Columns>
+
+                    <TableRowGroup>
+                        <!-- Header row for the table. -->
+                        <TableRow >
+                            <TableCell>
+                                <Paragraph FontSize="14pt" FontWeight="Bold" >Tâche</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph FontSize="14pt" FontWeight="Bold">Description</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph FontSize="14pt" FontWeight="Bold">Actions</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                   
+                </Table>
+                
+            </FlowDocument>
+        </FlowDocumentReader>
+        
+        <!--<ScrollViewer Grid.Row="1">
+            <Grid x:Name="content">
+            </Grid>
+        </ScrollViewer>-->
+        
     </Grid>
 </Window>
