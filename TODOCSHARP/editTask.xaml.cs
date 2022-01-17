@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Data.Sqlite;
 
 namespace TODOCSHARP
 {
@@ -19,9 +20,40 @@ namespace TODOCSHARP
     /// </summary>
     public partial class editTask : Window
     {
+        public string[] infos
+        {
+            get;
+            set;
+        }
+
+        public string id
+        { get; set; }   
         public editTask()
         {
             InitializeComponent();
+        }
+
+        public editTask(string id_) : this()
+        {
+            Connection co = new Connection();
+            infos = co.getTask(id_);
+            id = id_;
+            task.Text = infos[0];
+            description.Text = infos[1];    
+        }
+
+        private void btn_edit_Click(object sender, RoutedEventArgs e)
+        {
+            Connection co = new Connection();
+            Boolean result = false;
+            result = co.editTask(id, infos);
+
+            if (result)
+            {
+                MainWindow mainWindow = new MainWindow();
+                this.Close();
+                mainWindow.Show();
+            }
         }
     }
 }

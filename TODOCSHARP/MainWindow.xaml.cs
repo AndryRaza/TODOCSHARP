@@ -4,15 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Microsoft.Data.Sqlite;
+using System.Data;
 
 namespace TODOCSHARP
 {
@@ -29,50 +21,11 @@ namespace TODOCSHARP
 
         public List<String> nameTask = new List<string> { };
         public List<String> descriptionTask = new List<string> { };
-
-        public class Task{
-            private string name;
-            private string description; 
-            public Task(string n, string d)
-            {
-                name = n; 
-                description = d;
-            }
-        }
-
-        public Dictionary<int,Task> tasks = new Dictionary<int,Task>(); 
-
         private void getTasks()
         {
-            string pathDB = @"Data Source=C:\Users\widoo\Desktop\sqlitestudio-3.3.3\SQLiteStudio\todo";
-            using (var connection = new SqliteConnection(pathDB))
-            {
-                connection.Open();
-                var query =
-                    @"
-                        SELECT *
-                        FROM task
-                    ";
-
-                var command = connection.CreateCommand();
-                command.CommandText = query;
-
- 
-
-                using (var reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        var name= reader.GetString(1);
-                        var description = reader.GetString(2);
-                        nameTask.Add(name); 
-                        descriptionTask.Add(description);
-                        tasks.Add(Int32.Parse(reader.GetString(0)),new Task(reader.GetString(1),reader.GetString(2)));
-                    }
-       
-                }
-                showTasks();
-            }
+            Connection co = new Connection();
+            var tasks = co.getTasks();
+            showTasks(tasks);
         }
 
         private void add_Click(object sender, RoutedEventArgs e)
@@ -82,40 +35,36 @@ namespace TODOCSHARP
             addtask.ShowDialog();
         }
 
-        private void showTasks()
+        private void showTasks(Dictionary<int,Connection.Task> tasks)
         {
-            var rowGroup = contentTable.RowGroups.FirstOrDefault();
+            //DataRow dr = DataTable.NewRow();
 
             foreach(var task in tasks)
             {
-                Console.WriteLine(task.Value);
+
             }
+            /*
+           var rowGroup = contentTable.RowGroups.FirstOrDefault();
 
-            if (rowGroup != null)
-            {
-                int i = 0;
-                while(i < nameTask.Count)
-                {
-                    TableRow row = new TableRow();
+           foreach(var task in tasks)
+           {
+               var t = task.Value;
 
-                    TableCell cell = new TableCell();
+               TableRow row = new TableRow();
 
-                    cell.Blocks.Add(new Paragraph(new Run(nameTask[i])));
-                    row.Cells.Add(cell);
+               TableCell cell = new TableCell();
 
-                    cell = new TableCell();
-                    cell.Blocks.Add(new Paragraph(new Run(descriptionTask[i])));
-                    row.Cells.Add(cell);
+               cell.Blocks.Add(new Paragraph(new Run(t.name)));
+               row.Cells.Add(cell);
 
-                    rowGroup.Rows.Add(row);
-                    i++;
-                }
-            }           
-        }
+               cell = new TableCell();
+               cell.Blocks.Add(new Paragraph(new Run(t.description)));
+               row.Cells.Add(cell);
 
-        private void editTask(int i)
-        {
-            string pathDB = @"Data Source=C:\Users\widoo\Desktop\sqlitestudio-3.3.3\SQLiteStudio\todo";
+               rowGroup.Rows.Add(row);
+
+           }
+           */
         }
     }
 }

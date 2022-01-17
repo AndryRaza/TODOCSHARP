@@ -27,27 +27,17 @@ namespace TODOCSHARP
 
         private void btn_add_Click(object sender, RoutedEventArgs e)
         {
-            string pathDB = @"Data Source=C:\Users\widoo\Desktop\sqlitestudio-3.3.3\SQLiteStudio\todo";
-            using (var connection = new SqliteConnection(pathDB))
-            {
-                connection.Open();
-                var query =
-                    @"
-                        INSERT INTO task
-                        (name,description,status)
-                        VALUES ($name,$description,true)
-                    ";
+            Connection co = new Connection();
+            string[] infos = {task.Text, description.Text };
 
-                var command = connection.CreateCommand();
-                command.CommandText = query;
-                command.Parameters.AddWithValue("$name", task.Text);
-                command.Parameters.AddWithValue("$description", description.Text);
-                command.ExecuteNonQuery();
+            Boolean result = false;
 
-                MainWindow mainWindow = new MainWindow();
-                this.Close();
-                mainWindow.Show();
-            }
+            result = co.addTask(infos);
+
+            MainWindow mainWindow = new MainWindow();
+            this.Close();
+            mainWindow.Show();
+
         }
     }
 }

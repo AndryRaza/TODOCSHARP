@@ -23,8 +23,18 @@
                 <TextBlock Text="+" VerticalAlignment="Center" HorizontalAlignment="Center" />
             </Button>
         </Grid>
+        <DataGrid Grid.Row="1"  x:Name="contentGrid">
 
-        <FlowDocumentReader Grid.Row="1" ViewingMode="Scroll">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nom" Width="1*" />
+                <DataGridTextColumn Header="Description" Width="1*"/>
+                <DataGridTextColumn Header="Actions" Width="1*" />
+            </DataGrid.Columns>
+        
+        </DataGrid>
+
+
+        <!-- <FlowDocumentReader Grid.Row="1" ViewingMode="Scroll">
             <FlowDocument>
                 <Table CellSpacing="1"  x:Name="contentTable">
                     <Table.Columns>
@@ -34,7 +44,7 @@
                     </Table.Columns>
 
                     <TableRowGroup>
-                        <!-- Header row for the table. -->
+                         Header row for the table.
                         <TableRow >
                             <TableCell>
                                 <Paragraph FontSize="14pt" FontWeight="Bold" >Tâche</Paragraph>
@@ -52,7 +62,7 @@
                 
             </FlowDocument>
         </FlowDocumentReader>
-        
+        -->
         <!--<ScrollViewer Grid.Row="1">
             <Grid x:Name="content">
             </Grid>

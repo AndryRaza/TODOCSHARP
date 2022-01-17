@@ -14,11 +14,15 @@
             <RowDefinition Height="0.2*"/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <TextBlock Text="Modifier la tâche" Grid.Row="0" FontSize="30" VerticalAlignment="Center"  HorizontalAlignment="Center"/>
 
-        
-        
+        <TextBox Grid.Row="1" x:Name="task" Margin="50,50,50,50" />
+        <TextBox Grid.Row="2" x:Name="description" Margin="50,0,50,0" />
+        <Button x:Name="btn_edit" Content="Ajouter" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="3" Height="50" Width="100" Margin="0,10,50,0" Click="btn_edit_Click"/>
+
+
     </Grid>
 </Window>
