@@ -78,7 +78,19 @@ namespace TODOCSHARP
                bool success = connection.editTask(id,new string[]{data.name,newValue });
             }
 
+            if (nameColumn.ToString() == "Nom" && newValue.Length > 1)
+            {
+                bool success = connection.editTask(id, new string[] { newValue, data.description });
+            }
+
+            if (nameColumn.ToString() == "Nom" && newValue.Length == 0)
+            {
+                MessageBox.Show("Nom de la tâche obligatoire", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                e.Cancel = true;
+            }
+
         }
+
 
         private void Delete(object sender,KeyEventArgs e)
         {   

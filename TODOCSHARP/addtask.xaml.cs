@@ -45,6 +45,10 @@ namespace TODOCSHARP
             {
                 result = co.addTask(infos);
             }
+            else
+            {
+                MessageBox.Show("Le nom de la tâche est obligatoire","Attention",MessageBoxButton.OK,MessageBoxImage.Error);
+            }
     
             if (result)
             {
