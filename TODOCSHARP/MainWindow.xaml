@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TODOCSHARP"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="ToutouListe" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions></Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -23,50 +23,14 @@
                 <TextBlock Text="+" VerticalAlignment="Center" HorizontalAlignment="Center" />
             </Button>
         </Grid>
-        <DataGrid Grid.Row="1"  x:Name="contentGrid">
+        <DataGrid Grid.Row="1"  x:Name="contentGrid" SelectionMode="Single" AutoGenerateColumns="False" CanUserReorderColumns="False" CellEditEnding="resultGrid_CellEditEnding">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nom" Width="1*" />
-                <DataGridTextColumn Header="Description" Width="1*"/>
-                <DataGridTextColumn Header="Actions" Width="1*" />
+                <DataGridTextColumn Header="Nom" Binding="{Binding name}"  Width="1*"  />
+                <DataGridTextColumn Header="Description" Binding="{Binding description}" Width="1*"/>
+                <DataGridTextColumn Visibility="Hidden" Binding="{Binding id}"/>
+           
             </DataGrid.Columns>
-        
         </DataGrid>
-
-
-        <!-- <FlowDocumentReader Grid.Row="1" ViewingMode="Scroll">
-            <FlowDocument>
-                <Table CellSpacing="1"  x:Name="contentTable">
-                    <Table.Columns>
-                        <TableColumn Width="7*"/>
-                        <TableColumn Width="10*"/>
-                        <TableColumn Width="5*" />
-                    </Table.Columns>
-
-                    <TableRowGroup>
-                         Header row for the table.
-                        <TableRow >
-                            <TableCell>
-                                <Paragraph FontSize="14pt" FontWeight="Bold" >Tâche</Paragraph>
-                            </TableCell>
-                            <TableCell>
-                                <Paragraph FontSize="14pt" FontWeight="Bold">Description</Paragraph>
-                            </TableCell>
-                            <TableCell>
-                                <Paragraph FontSize="14pt" FontWeight="Bold">Actions</Paragraph>
-                            </TableCell>
-                        </TableRow>
-                    </TableRowGroup>
-                   
-                </Table>
-                
-            </FlowDocument>
-        </FlowDocumentReader>
-        -->
-        <!--<ScrollViewer Grid.Row="1">
-            <Grid x:Name="content">
-            </Grid>
-        </ScrollViewer>-->
-        
     </Grid>
 </Window>

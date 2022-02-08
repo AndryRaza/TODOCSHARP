@@ -149,7 +149,7 @@ namespace TODOCSHARP
 
                     var command = connection.CreateCommand();
                     command.CommandText = query;
-                    command.Parameters.AddWithValue("$name", task);
+                    command.Parameters.AddWithValue("$task", task);
                     command.Parameters.AddWithValue("$description", description);
                     command.Parameters.AddWithValue("$id", id);
                     command.ExecuteNonQuery();

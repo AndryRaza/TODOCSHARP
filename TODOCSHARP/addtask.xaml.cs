@@ -23,8 +23,17 @@ namespace TODOCSHARP
         public addtask()
         {
             InitializeComponent();
+            this.PreviewKeyDown += new KeyEventHandler(keyEnter);
         }
 
+        private void keyEnter(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                btn_add_Click(sender, e);
+            }
+            
+        }
         private void btn_add_Click(object sender, RoutedEventArgs e)
         {
             Connection co = new Connection();
@@ -32,12 +41,17 @@ namespace TODOCSHARP
 
             Boolean result = false;
 
-            result = co.addTask(infos);
-
-            MainWindow mainWindow = new MainWindow();
-            this.Close();
-            mainWindow.Show();
-
+            if(task.Text.Length > 1)
+            {
+                result = co.addTask(infos);
+            }
+    
+            if (result)
+            {
+                MainWindow mainWindow = new MainWindow();
+                this.Close();
+                mainWindow.Show();
+            }
         }
     }
 }
