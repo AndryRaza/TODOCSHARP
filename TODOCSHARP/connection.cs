@@ -4,12 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
+using System.IO;
+
 
 namespace TODOCSHARP
 {
     internal class Connection
     {
-        private String pathDB = @"Data Source=C:\Users\widoo\Desktop\sqlitestudio-3.3.3\SQLiteStudio\todo";
+        private String pathDB = @"Data Source="+ Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"todo");
+
 
         public List<String> nameTask = new List<string> { };
         public List<String> descriptionTask = new List<string> { };
@@ -63,7 +66,7 @@ namespace TODOCSHARP
         public string[] getTask(string id)
         {
             string[] infos = { };
-
+       
             using (var connection = new SqliteConnection(pathDB))
             {
                 connection.Open();

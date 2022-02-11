@@ -12,7 +12,7 @@
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="Fichier">
                     <MenuItem Header="Nouveau" Click="resetTasks" />
-                    <MenuItem Header="Exporter" Click="saveToCsv" />
+                    <!--<MenuItem Header="Exporter" Click="saveToCsv" />-->
                     <Separator />
                     <MenuItem Header="Quitter" />
                 </MenuItem>
