@@ -26,6 +26,8 @@ namespace TODOCSHARP
         public List<String> nameTask = new List<string> { };
         public List<String> descriptionTask = new List<string> { };
 
+        //public Connection connection = new Connection();
+
         public class task_
         {
             public string id { get; set; }  
@@ -40,12 +42,13 @@ namespace TODOCSHARP
             showTasks(tasks);
         }
 
-        private void add_Click(object sender, RoutedEventArgs e)
-        {
-            addtask addtask = new addtask();
-            this.Close();
-            addtask.ShowDialog();
-        }
+        //Obsolète
+        //private void add_Click(object sender, RoutedEventArgs e)
+        //{
+        //    addtask addtask = new addtask();
+        //    this.Close();
+        //    addtask.ShowDialog();
+        //}
 
         private void showTasks(Dictionary<int,Connection.Task> tasks)
         {
@@ -69,11 +72,25 @@ namespace TODOCSHARP
             //Nom de la colonne 
             var nameColumn = e.Column.Header;
 
+            //Modification 
             var newValue = editingTextBox.Text;
 
             Connection connection = new Connection();   
 
-            if(nameColumn.ToString() == "Description")
+            //Ajouter une nouvelle tâche
+            if(id == null && nameColumn.ToString() == "Nom")
+            {
+                connection.addTask(new string[] { newValue, "" });
+            }
+
+            if (data.name == null && nameColumn.ToString() == "Description")
+            {
+                e.Cancel = true;
+            }
+
+
+            //Modifier les champs nom et description, Attention le champ nom est obligatoire 
+            if (nameColumn.ToString() == "Description")
             {
                bool success = connection.editTask(id,new string[]{data.name,newValue });
             }
@@ -118,6 +135,29 @@ namespace TODOCSHARP
                 }
                
             }
+        }
+
+        private void resetTasks(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Réinitialiser toutes les tâches ?", "Suppression", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    Boolean result_ = false;
+                    contentGrid.ItemsSource = new List<task_>();
+                    Connection connection = new Connection();
+                    result_ = connection.resetTasks();
+                    break;
+                case MessageBoxResult.No:
+                    e.Handled = true;
+                    break;
+            }
+        }
+
+        private void saveToCsv(object sender, RoutedEventArgs e)
+        {
+     
         }
 
     }

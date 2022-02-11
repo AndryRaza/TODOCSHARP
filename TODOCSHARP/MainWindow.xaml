@@ -6,31 +6,37 @@
         xmlns:local="clr-namespace:TODOCSHARP"
         mc:Ignorable="d" 
         Title="ToutouListe" Height="450" Width="800">
+    
     <Grid>
-        <Grid.ColumnDefinitions></Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0.2*"></RowDefinition>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="Fichier">
+                    <MenuItem Header="Nouveau" Click="resetTasks" />
+                    <MenuItem Header="Exporter" Click="saveToCsv" />
+                    <Separator />
+                    <MenuItem Header="Quitter" />
+                </MenuItem>
+            </Menu>
 
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="7*"></ColumnDefinition>
-                <ColumnDefinition ></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Liste des tâches" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" />
-            <Button Grid.Column="1" x:Name="add" FontSize="25" ToolTip="Ajouter une tâche" Click="add_Click" Margin="10,20,10,20"  >
-                <TextBlock Text="+" VerticalAlignment="Center" HorizontalAlignment="Center" />
-            </Button>
+        </DockPanel>
+        <Grid>
+            <Grid.ColumnDefinitions></Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.2*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <TextBlock  Text="Liste des tâches" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" />
+            </Grid>
+            <DataGrid Grid.Row="1"  x:Name="contentGrid" SelectionMode="Single" AutoGenerateColumns="False" CanUserReorderColumns="False" CellEditEnding="resultGrid_CellEditEnding">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nom" Binding="{Binding name}"  Width="1*"  />
+                    <DataGridTextColumn Header="Description" Binding="{Binding description}" Width="1*"/>
+                    <DataGridTextColumn Visibility="Hidden" Binding="{Binding id}"/>
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
-        <DataGrid Grid.Row="1"  x:Name="contentGrid" SelectionMode="Single" AutoGenerateColumns="False" CanUserReorderColumns="False" CellEditEnding="resultGrid_CellEditEnding">
-
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Nom" Binding="{Binding name}"  Width="1*"  />
-                <DataGridTextColumn Header="Description" Binding="{Binding description}" Width="1*"/>
-                <DataGridTextColumn Visibility="Hidden" Binding="{Binding id}"/>
-           
-            </DataGrid.Columns>
-        </DataGrid>
     </Grid>
+    
 </Window>

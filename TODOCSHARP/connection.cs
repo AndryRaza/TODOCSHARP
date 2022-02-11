@@ -117,7 +117,7 @@ namespace TODOCSHARP
                     command.Parameters.AddWithValue("$name", task);
                     command.Parameters.AddWithValue("$description", description);
                     command.ExecuteNonQuery();
-
+             
                     result = true;
                 }
             }
@@ -182,6 +182,26 @@ namespace TODOCSHARP
 
                     result = true;
                 }
+            }
+
+            return result;
+        }
+
+        public Boolean resetTasks()
+        {
+            Boolean result = false;
+
+            using (var connection = new SqliteConnection(pathDB))
+            {
+                connection.Open();
+                var query = @"
+                          DELETE from task
+                    ";
+                var command = connection.CreateCommand();
+                command.CommandText = query;
+                command.ExecuteNonQuery();
+
+                result = true;
             }
 
             return result;
